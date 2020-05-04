@@ -4,9 +4,7 @@ package com.company;/*
  * and open the template in the editor.
  */
 
-
-import com.sun.istack.internal.NotNull;
-
+import org.jetbrains.annotations.NotNull;
 import java.util.Random;
 
 /**
