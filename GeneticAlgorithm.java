@@ -4,8 +4,8 @@ package com.company;/*
  * and open the template in the editor.
  */
 
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -22,9 +22,8 @@ import java.util.stream.IntStream;
  * @author FAkinola
  */
 public class GeneticAlgorithm {
-    static int allpath = 8;
+    private static int allpath = 8;
     private static int geneLength = 70;
-    private static double maxFitnessFromEquation = geneLength * 2;
     List<Integer> alreadyPicked = new ArrayList();
     List<Integer> alvalueNotPicked = new ArrayList();
     int evaluatorSize = 7;
@@ -1411,7 +1410,7 @@ public class GeneticAlgorithm {
             }
         }
         paretoFrontTeam.clear();
-        if (maxFitness >= maxFitnessFromEquation || secondMaxFitness >= maxFitnessFromEquation) {
+        if (maxFitness >= 10 || secondMaxFitness >= 10) {
             foundFittest = true;
         }
         fillFromArchive(switchOverPop, tempArchivePop);
