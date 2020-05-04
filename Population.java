@@ -1,4 +1,4 @@
-/*
+package com.company;/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * @author FAkinola qqnorm(rnorm(data))
+ * @author FAkinola 
  */
 public class Population implements Cloneable {
     ChromosomeSelection[] chromosomes;
@@ -32,7 +32,7 @@ public class Population implements Cloneable {
      * @param index
      * @param chromosome saves a chromosome that has probably undergone change or is new
      */
-    public void saveChromosomes(int index, ChromosomeSelection chromosome) throws CloneNotSupportedException {
+    public void saveChromosomes(int index, ChromosomeSelection chromosome) {
         chromosomes[index] = (ChromosomeSelection) chromosome.clone();
     }
 
@@ -40,7 +40,7 @@ public class Population implements Cloneable {
      * @param popSize
      * @return randomly pick within the array
      */
-    public ChromosomeSelection randomlyPicked(int popSize) throws CloneNotSupportedException {
+    public ChromosomeSelection randomlyPicked(int popSize) {
         return (ChromosomeSelection) chromosomes[new Random().nextInt(popSize)].clone();
     }
 
@@ -48,7 +48,9 @@ public class Population implements Cloneable {
      * @param popSize
      * @return randomly pick within the pop and archive pop
      */
-    public ChromosomeSelection randomlyPicked(int popSize, int archivePopSize, List<ChromosomeSelection> archiveChromosome) throws CloneNotSupportedException {
+    public ChromosomeSelection randomlyPicked(int popSize,
+                                              int archivePopSize,
+                                              List<ChromosomeSelection> archiveChromosome) {
         int position = new Random().nextInt(popSize + archivePopSize);
         if (position >= popSize) {
             return (ChromosomeSelection) archiveChromosome.get(position - popSize).clone();
@@ -57,7 +59,7 @@ public class Population implements Cloneable {
         }
     }
 
-    public ChromosomeSelection getChromosome(int index) throws CloneNotSupportedException {
+    public ChromosomeSelection getChromosome(int index) {
         return (ChromosomeSelection) chromosomes[index].clone();
     }
 
@@ -66,16 +68,14 @@ public class Population implements Cloneable {
         for (int i = 0; i < POPSIZE; i++) {
             ChromosomeSelection chrom = chromosomes[i];
             if (chrom.getStringChromosome().equals(chromosome)) {
-                pos = i;
-                return pos;
+                return i;
             }
         }
-        if (pos == -1 && archiv != null) {
+        if (archiv != null) {
             for (int i = 0; i < archiv.size(); i++) {
                 ChromosomeSelection chrom = archiv.get(i);
                 if (chrom.getStringChromosome().equals(chromosome)) {
-                    pos = i + POPSIZE;
-                    return pos;
+                    return i + POPSIZE;
                 }
             }
         }
@@ -91,8 +91,8 @@ public class Population implements Cloneable {
             if ((chromosomes[maxFit2].fitness <= chromosomes[i].fitness ||
                     chromosomes[maxFit2].secondFitness <= chromosomes[i].secondFitness ||
                     chromosomes[maxFit2].fitness <= chromosomes[i].secondFitness ||
-                    chromosomes[maxFit2].secondFitness <= chromosomes[i].fitness
-            ) && i != maxFit) {
+                    chromosomes[maxFit2].secondFitness <= chromosomes[i].fitness)
+                    && i != maxFit) {
                 maxFit2 = i;
             }
         }
@@ -105,7 +105,8 @@ public class Population implements Cloneable {
         }
         upgradedPopulation.chromosomes = this.chromosomes.clone();
         for (int i = 0; i < this.chromosomes.length; i++) {
-            upgradedPopulation.chromosomes[i].genes = Arrays.copyOf(this.chromosomes[i].genes, ChromosomeSelection.geneLength);
+            upgradedPopulation.chromosomes[i].genes = Arrays.copyOf(this.chromosomes[i].genes,
+                    ChromosomeSelection.geneLength);
             upgradedPopulation.chromosomes[i].secondFitness = this.chromosomes[i].secondFitness;
             upgradedPopulation.chromosomes[i].fitness = this.chromosomes[i].fitness;
             upgradedPopulation.chromosomes[i].partner2Chromosome = this.chromosomes[i].partner2Chromosome;
@@ -113,7 +114,7 @@ public class Population implements Cloneable {
         }
         upgradedPopulation.maxFit = this.maxFit;
         upgradedPopulation.maxFitOfSecondFittest = this.maxFitOfSecondFittest;
-        upgradedPopulation.positionPointer=0;
+        upgradedPopulation.positionPointer = 0;
         upgradedPopulation.fittest = this.fittest;
         return upgradedPopulation;
     }
