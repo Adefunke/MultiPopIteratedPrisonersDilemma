@@ -1,10 +1,11 @@
-/*
+package com.company;/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
-import org.jetbrains.annotations.NotNull;
+
+import com.sun.istack.internal.NotNull;
 
 import java.util.Random;
 
@@ -64,7 +65,8 @@ public class Computations {
      */
     // function to convert binary
     // string to gray string
-    @NotNull ChromosomeSelection binaryToGray(@NotNull ChromosomeSelection binary, int bound, boolean rastrigin) {
+    @NotNull
+    ChromosomeSelection binaryToGray(@NotNull ChromosomeSelection binary, int bound, boolean rastrigin) {
         ChromosomeSelection gray = new ChromosomeSelection(bound, false);
 
         gray.setGene(0, binary.getGene(0));
